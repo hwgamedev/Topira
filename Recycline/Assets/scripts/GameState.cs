@@ -1,7 +1,7 @@
 ﻿public static class GameState
 {
-    public static int MAPWIDTH = 14;
-    public static int MAPHEIGHT = 14;
+    public static int MAPWIDTH = 15;
+    public static int MAPHEIGHT = 15;
 	public static float TILESIZE = 0.5f; 
     public static TileType[,] FLOORMAP = new TileType[MAPHEIGHT, MAPWIDTH];
     public static ObjectType[,] OBJECTMAP = new ObjectType[MAPHEIGHT, MAPWIDTH];

@@ -17,16 +17,40 @@ public class FindPath
     //List<TileLocation> closedNodes = new List<TileLocation>();
     TileLocation _target;
 
+    bool foundTarget = false;
+
     bool[,] visitedNodes = new bool[GameState.MAPWIDTH, GameState.MAPHEIGHT];
     bool[,] closedNodes = new bool[GameState.MAPWIDTH, GameState.MAPHEIGHT];
 
     List<TileLocation> finalPath = new List<TileLocation>();
 
+    public List<TileLocation> FinalPath
+    {
+        get
+        {
+            return finalPath;
+        }
+
+        set
+        {
+            finalPath = value;
+        }
+    }
+
     public FindPath(TileLocation start, TileLocation target)
     {
+        foundTarget = false;
         //Flip these so the target comes back in the right order!
         _target = start;
-        findNeighbours(_target);
+
+        openNodes.Add(target);
+
+        while (!foundTarget && openNodes.Count > 0)
+        {
+            int newPop = findSmallestF();
+            if(newPop > -1)
+                findNeighbours(openNodes.PopAt(newPop));
+        }
     }
 
     public void findNeighbours(TileLocation tileLoc)
@@ -42,37 +66,40 @@ public class FindPath
                 openNodes.Add(new TileLocation(xPos + 1, yPos, gVal + 10, tileLoc));
             }
             //x = 0, y + 1
-            if (yPos + 1 < GameState.MAPHEIGHT && GameState.getTile(xPos, yPos + 1) != GameState.TileType.Rock && !closedNodes[xPos, yPos + 1] && !closedNodes[xPos, yPos + 1])
+            if (yPos + 1 < GameState.MAPHEIGHT && GameState.getTile(xPos, yPos + 1) != GameState.TileType.Rock && !closedNodes[xPos, yPos + 1] && !visitedNodes[xPos, yPos + 1])
             {
                 openNodes.Add(new TileLocation(xPos, yPos + 1, gVal + 10, tileLoc));
             }
             //x - 1, y = 0
-            if (xPos - 1 > 0 && GameState.getTile(xPos - 1, yPos) != GameState.TileType.Rock && !closedNodes[xPos - 1, yPos] && !closedNodes[xPos - 1, yPos])
+            if (xPos - 1 >= 0 && GameState.getTile(xPos - 1, yPos) != GameState.TileType.Rock && !closedNodes[xPos - 1, yPos] && !visitedNodes[xPos - 1, yPos])
             {
                 openNodes.Add(new TileLocation(xPos - 1, yPos, gVal + 10, tileLoc));
             }
             //x = y, y - 1
-            if (yPos - 1 > 0 && GameState.getTile(xPos, yPos - 1) != GameState.TileType.Rock && !closedNodes[xPos, yPos - 1] && !closedNodes[xPos, yPos - 1])
+            if (yPos - 1 >= 0 && GameState.getTile(xPos, yPos - 1) != GameState.TileType.Rock && !closedNodes[xPos, yPos - 1] && !visitedNodes[xPos, yPos - 1])
             {
                 openNodes.Add(new TileLocation(xPos, yPos - 1, gVal + 10, tileLoc));
             }
+
+            //closedNodes.Add(tileLoc);
+            closedNodes[xPos, yPos] = true;
+     
         }
         else
         {
             TileLocation childTile = tileLoc;
             while (childTile.Parent != null)
             {
-                finalPath.Add(childTile);
+                FinalPath.Add(childTile);
                 childTile = childTile.Parent;
             }
-        }
 
-        //closedNodes.Add(tileLoc);
-        closedNodes[xPos, yPos] = true;
-        findSmallestF();
+            foundTarget = true;
+            return;
+        }
     }
 
-    private void findSmallestF()
+    private int findSmallestF()
     {
         int smallestF = int.MaxValue;
         int openListPos = -1;
@@ -88,6 +115,6 @@ public class FindPath
             }
         }
 
-        findNeighbours(openNodes.PopAt(openListPos));
+        return openListPos;
     }
 }

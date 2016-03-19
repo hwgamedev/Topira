@@ -6,10 +6,18 @@ public class TileLocation
     private int _x;
     private int _y;
 
-    public TileLocation(int x, int y)
+    private int _g = 0;
+    private int _h = 0;
+
+    private TileLocation _parent = null;
+
+    public TileLocation(int x, int y, int g = 0, TileLocation parent = null)
     {
         X = x;
         Y = y;
+        G = g;
+        Parent = parent;
+
     }
 
     public int X
@@ -35,6 +43,45 @@ public class TileLocation
         set
         {
             _y = value;
+        }
+    }
+
+    public int G
+    {
+        get
+        {
+            return _g;
+        }
+
+        set
+        {
+            _g = value;
+        }
+    }
+
+    public int H
+    {
+        get
+        {
+            return _h;
+        }
+
+        set
+        {
+            _h = value;
+        }
+    }
+
+    public TileLocation Parent
+    {
+        get
+        {
+            return _parent;
+        }
+
+        set
+        {
+            _parent = value;
         }
     }
 }

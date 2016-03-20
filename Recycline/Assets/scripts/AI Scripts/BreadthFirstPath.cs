@@ -6,13 +6,30 @@ public class BreadthFirstPath
 {
     private Queue<TileLocation> searchQueue;
 
+	private static BreadthFirstPath instance=null;
+
+	private BreadthFirstPath()
+	{
+	}
+
+	public static BreadthFirstPath Instance
+	{
+		get
+		{
+			if (instance==null)
+			{
+				instance = new BreadthFirstPath();
+			}
+			return instance;
+		}
+	}
 
     public void updatePaths()
     {
         GameState.setTarget(GameState.MAPWIDTH / 2, GameState.MAPHEIGHT - 1);
         resetPaths();
 
-        randomNoise();
+        //randomNoise();
 
         searchQueue.Enqueue(new TileLocation(GameState.TARGET.X, GameState.TARGET.Y));
         runPathSearch();

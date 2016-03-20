@@ -46,5 +46,8 @@ public class LevelManager : MonoBehaviour {
 				}
 			}
 		}
+		Vector2 tempx = new Vector2(GameState.MAPWIDTH/2, GameState.MAPHEIGHT-1f);
+		GameObject instances = Instantiate (Resources.Load("Target", typeof(GameObject))) as GameObject;
+		instances.gameObject.transform.position = tempx;
 	}
 }

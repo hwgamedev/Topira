@@ -44,5 +44,7 @@ public class BlankFloor : MonoBehaviour {
 				GameState.setGameObjects ((int)x, (int)y, null);
 			}
 		}
+
+		BreadthFirstPath.Instance.updatePaths ();
 	}
 }

@@ -15,7 +15,7 @@ public class TestController : MonoBehaviour
             }
         }*/
 
-        BreadthFirstPath path = new BreadthFirstPath();
+		BreadthFirstPath path = BreadthFirstPath.Instance;
         path.updatePaths();
     }
 	

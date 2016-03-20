@@ -10,6 +10,8 @@ public class MinionController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+		BreadthFirstPath path = BreadthFirstPath.Instance;
+		path.updatePaths ();
         //Put it at 0.0!
         this.transform.position = new Vector2(Mathf.Floor(Random.Range(0, GameState.MAPWIDTH)) , 0);
     }
@@ -21,19 +23,23 @@ public class MinionController : MonoBehaviour
 
         if (curDir == GameState.Direction.Right)
         {
-            this.transform.position = new Vector2(this.transform.position.x + speed * Time.deltaTime, this.transform.position.y);
+            this.transform.position = new Vector3(this.transform.position.x + speed * Time.deltaTime, this.transform.position.y, -0.2f);
+			this.transform.rotation = Quaternion.Euler (0, 90, 270);
         }
         else if (curDir == GameState.Direction.Down)
         {
-            this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y - speed * Time.deltaTime);
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - speed * Time.deltaTime, -0.2f);
+			this.transform.rotation = Quaternion.Euler (90, 90, 270);
         }
         else if (curDir == GameState.Direction.Left)
         {
-            this.transform.position = new Vector2(this.transform.position.x - speed * Time.deltaTime, this.transform.position.y);
+            this.transform.position = new Vector3(this.transform.position.x - speed * Time.deltaTime, this.transform.position.y, -0.2f);
+			this.transform.rotation = Quaternion.Euler (180, 90, 270);
         }
         else if (curDir == GameState.Direction.Up)
         {
-            this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + speed * Time.deltaTime);
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + speed * Time.deltaTime, -0.2f);
+			this.transform.rotation = Quaternion.Euler (270, 90, 270);
         }
     }
 
@@ -65,7 +71,7 @@ public class MinionController : MonoBehaviour
 
         if(curDir == GameState.Direction.Target)
         {
-            Destroy(gameObject, 0.2f);
+			this.transform.position = new Vector2(Mathf.Floor(Random.Range(0, GameState.MAPWIDTH)) , 0);
         }
     }
 }

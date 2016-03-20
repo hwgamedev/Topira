@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
 		levelScript.SetupScene ();
 		levelScript.LoadScene ();
 
-        Instantiate(Resources.Load("Minion"));
+        //Instantiate(Resources.Load("Minion"));
 	}
 
 	void Start () {

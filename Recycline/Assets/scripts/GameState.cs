@@ -11,8 +11,9 @@
     public static TileLocation TARGET;
 
 	public enum TileType {Rock, Outdoor, Corridor, Treasury, Entertainment, Hospital, Barracks, Utility, Security};
+
     public enum Direction { None, Up, Right, Down, Left, Target}
-    public enum ObjectType { }; //TODO: Fill in the types of objects here!! (For Pierre)
+    public enum ObjectType { None, Stone, Diamond }; //TODO: Fill in the types of objects here!! (For Pierre)
 	public enum GameStateType {Ready, Running, Win, Fail};
 
 	public static void setGameState(GameStateType gameStateType)

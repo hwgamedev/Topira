@@ -29,16 +29,16 @@ public class LevelManager : MonoBehaviour {
 		for (int x = 0; x < GameState.MAPWIDTH; x++) {
 			for (int y = 0; y < GameState.MAPHEIGHT; y++) {
 				
-				Vector2 temp = new Vector2(GameState.TILESIZE+x, GameState.TILESIZE+y);
+				Vector2 temp = new Vector2(GameState.TILESIZE+x-0.5f, GameState.TILESIZE+y-0.5f);
 				GameObject instance = null;
 				switch (GameState.getTile(x, y)) {
 					case GameState.TileType.Outdoor:
-						instance = Instantiate (Resources.Load("Blank", typeof(GameObject))) as GameObject;
+						instance = Instantiate (Resources.Load("Floor_Basic", typeof(GameObject))) as GameObject;
 						instance.gameObject.transform.position = temp;
 						break;
 					case GameState.TileType.Rock:
 						//Some Running Code
-						instance = Instantiate (Resources.Load("Rock", typeof(GameObject))) as GameObject;
+						instance = Instantiate (Resources.Load("Floor_Basic", typeof(GameObject))) as GameObject;
 						instance.gameObject.transform.position = temp;
 						break;
 					default:

@@ -55,7 +55,7 @@ public class TestController : MonoBehaviour
                     }
                     else if (GameState.getDir(x, y) == GameState.Direction.Up)
                     {
-                        Gizmos.color = Color.green;
+                        Gizmos.color = Color.magenta;
                         Gizmos.DrawSphere(new Vector2(x, y), 0.5f);
                     }
                     else if (GameState.getDir(x, y) == GameState.Direction.Target)

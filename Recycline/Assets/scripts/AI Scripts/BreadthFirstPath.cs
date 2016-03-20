@@ -27,13 +27,13 @@ public class BreadthFirstPath
                 if (GameState.getDir(x, y) != GameState.Direction.Target)
                 {
                     if (Random.value < 0.2)
-                        GameState.setTile(x, y, GameState.TileType.Rock);
+                        GameState.setObj(x, y, GameState.ObjectType.Stone);
                     else
-                        GameState.setTile(x, y, GameState.TileType.Outdoor);
+                        GameState.setObj(x, y, GameState.ObjectType.None);
                 }
                 else
                 {
-                    GameState.setTile(x, y, GameState.TileType.Outdoor);
+                    GameState.setObj(x, y, GameState.ObjectType.None);
                 }
             }
         }
@@ -70,7 +70,7 @@ public class BreadthFirstPath
             //Right
             if (x + 1 < GameState.MAPWIDTH && GameState.getDir(x + 1, y) == GameState.Direction.None)
             {
-                if (GameState.getTile(x + 1, y) == GameState.TileType.Outdoor)
+                if (GameState.getObj(x + 1, y) == GameState.ObjectType.None)
                 {
                     GameState.setDir(x + 1, y, GameState.Direction.Left);
                     searchQueue.Enqueue(new TileLocation(x + 1, y));
@@ -79,7 +79,7 @@ public class BreadthFirstPath
             //Left
             if (x - 1 > -1 && GameState.getDir(x - 1, y) == GameState.Direction.None)
             {
-                if (GameState.getTile(x - 1, y) == GameState.TileType.Outdoor)
+                if (GameState.getObj(x - 1, y) == GameState.ObjectType.None)
                 {
                     GameState.setDir(x - 1, y, GameState.Direction.Right);
                     searchQueue.Enqueue(new TileLocation(x - 1, y));
@@ -92,7 +92,7 @@ public class BreadthFirstPath
             //Down
             if (y - 1 > -1 && GameState.getDir(x, y - 1) == GameState.Direction.None)
             {
-                if (GameState.getTile(x, y - 1) == GameState.TileType.Outdoor)
+                if (GameState.getObj(x, y - 1) == GameState.ObjectType.None)
                 {
                     GameState.setDir(x, y - 1, GameState.Direction.Up);
                     searchQueue.Enqueue(new TileLocation(x, y - 1));
@@ -101,7 +101,7 @@ public class BreadthFirstPath
             //Up
             if (y + 1 < GameState.MAPHEIGHT && GameState.getDir(x, y + 1) == GameState.Direction.None)
             {
-                if (GameState.getTile(x, y + 1) == GameState.TileType.Outdoor)
+                if (GameState.getObj(x, y + 1) == GameState.ObjectType.None)
                 {
                     GameState.setDir(x, y + 1, GameState.Direction.Down);
                     searchQueue.Enqueue(new TileLocation(x, y + 1));

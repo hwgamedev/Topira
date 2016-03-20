@@ -11,16 +11,15 @@ public class LevelManager : MonoBehaviour {
 			}
 		}
 
-		//Set random clusters of Rock
-		int xOut = 0;		
-		int xIn = 0;
+		int yy = 0;
+		for (int x = 0; x < GameState.MAPWIDTH; x++) {
+				GameState.setTile (x, yy, GameState.TileType.Security);
+		}
+
+		yy = GameState.MAPHEIGHT-1;
 
 		for (int x = 0; x < GameState.MAPWIDTH; x++) {
-			for (int y = 0; y < GameState.MAPHEIGHT; y++) {
-				if (x > 2 && x < GameState.MAPWIDTH-2 && y > 2 && y < GameState.MAPHEIGHT-2) {
-					GameState.setTile (x, y, GameState.TileType.Rock);
-				}
-			}
+			GameState.setTile (x, yy, GameState.TileType.Security);
 		}
 	}
 		
@@ -36,9 +35,9 @@ public class LevelManager : MonoBehaviour {
 						instance = Instantiate (Resources.Load("Floor_Basic", typeof(GameObject))) as GameObject;
 						instance.gameObject.transform.position = temp;
 						break;
-					case GameState.TileType.Rock:
+					case GameState.TileType.Security:
 						//Some Running Code
-						instance = Instantiate (Resources.Load("Floor_Basic", typeof(GameObject))) as GameObject;
+					instance = Instantiate (Resources.Load("Floor_NoBuild", typeof(GameObject))) as GameObject;
 						instance.gameObject.transform.position = temp;
 						break;
 					default:

@@ -2,12 +2,16 @@
 {
     public static int MAPWIDTH = 15;
     public static int MAPHEIGHT = 15;
-	public static float TILESIZE = 0.5f; 
-    public static TileType[,] FLOORMAP = new TileType[MAPHEIGHT, MAPWIDTH];
-    public static ObjectType[,] OBJECTMAP = new ObjectType[MAPHEIGHT, MAPWIDTH];
-	public static GameStateType GAMESTATE = new GameStateType();
+	public static float TILESIZE = 0.5f;
+    private static TileType[,] FLOORMAP = new TileType[MAPHEIGHT, MAPWIDTH];
+    private static ObjectType[,] OBJECTMAP = new ObjectType[MAPHEIGHT, MAPWIDTH];
+    private static GameStateType GAMESTATE = new GameStateType();
+
+    private static Direction[,] DIRMAP = new Direction[MAPHEIGHT, MAPWIDTH];
+    public static TileLocation TARGET;
 
 	public enum TileType {Rock, Outdoor, Corridor, Treasury, Entertainment, Hospital, Barracks, Utility, Security};
+    public enum Direction { None, Up, Right, Down, Left, Target}
     public enum ObjectType { }; //TODO: Fill in the types of objects here!! (For Pierre)
 	public enum GameStateType {Ready, Running, Win, Fail};
 
@@ -39,5 +43,21 @@
     public static ObjectType getObj(int x, int y)
     {
         return OBJECTMAP[y, x];
+    }
+
+    public static void setDir(int x, int y, Direction dir)
+    {
+        DIRMAP[y, x] = dir;
+    }
+
+    public static Direction getDir(int x, int y)
+    {
+        return DIRMAP[y, x];
+    }
+
+    public static void setTarget(int x, int y)
+    {
+        DIRMAP[y, x] = Direction.Target;
+        TARGET = new TileLocation(x, y);
     }
 }

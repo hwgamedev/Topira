@@ -26,7 +26,7 @@ public class BreadthFirstPath
             {
                 if (GameState.getDir(x, y) != GameState.Direction.Target)
                 {
-                    if (Random.value < 0.3)
+                    if (Random.value < 0.2)
                         GameState.setTile(x, y, GameState.TileType.Rock);
                     else
                         GameState.setTile(x, y, GameState.TileType.Outdoor);
